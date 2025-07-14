@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALCULATOR</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: brown;
+            height: 100vh;
+            margin: 0;
+            
+        }
+        button{
+            display: flex;
+            height: 8vh;
+            width: 8vw;
+            border-radius: 20%;
+            font-size:xx-large;
+           
+        }
+
+       .button:hover {
+            background-color: #ccc;
+        }
+        .button:active{
+             background-color: red;
+        }
+        .box{
+            background-color: blue;
+            display: flex;
+            flex-direction: column;
+            gap: 2vh;
+            padding: 1rem;
+            border-radius: 20%;
+        }
+
+        .box > div {
+                display: flex;
+                gap: 2vh;
+                justify-content: center;
+            }
+
+  .screenbox {
+      background-color: red;
+      padding: 1rem;
+      border-radius: 12px;
+    }
+
+    .screen {
+        background-color: black;
+        color: white;
+        height: 5vh;
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 24px;
+        border-radius: 5px;
+        width: 28vw;
+        overflow-x: auto;       
+        white-space: nowrap;
+        text-align: right;       
+        direction: ltr; 
+        margin: 0;
+    }
+ 
+
+    </style>
+</head>
+<body>
+    
+    <div class="box">
+        <div class="screenbox">
+           <div class="screen">
+
+           </div>
+        </div>
+        <div>
+            <button class="button" value="1">1</button>
+            <button class="button" value="2">2</button>
+            <button class="button" value="3">3</button>
+            <button  class="button" value="*">x</button>
+        </div>
+        <div>
+            <button class="button" value="4">4</button>
+            <button class="button" value="5">5</button>
+            <button class="button" value="6">6</button>
+             <button  class="button" value="%">%</button>
+        </div>
+        <div>
+            <button class="button" value="7">7</button>
+            <button class="button" value="8">8</button>
+            <button class="button" value="9">9</button>
+             <button  class="button" value="-">-</button>
+        </div>
+        <div>
+            <button class="button" value="0">0</button>
+            <button class="button" value="c">c</button>
+            <button class="button" value="=">=</button>
+             <button  class="button" value="+">+</button>
+        </div>
+    </div>
+
+    <script>
+        const screen=document.querySelector(".screen")
+        const buttons=document.querySelectorAll(".button")
+        let reset=false;
+        buttons.forEach(function(button){
+
+            button.addEventListener("click",function(){
+
+                const value=this.value
+                if(value=="c"){
+                    screen.textContent=""
+                }else if(value=="="){
+                    try{
+                        const expression=screen.textContent
+                        screen.textContent=eval(expression)
+                        reset=true
+                    }catch(err){
+                        screen.textContent="error"
+                        reset=true
+                    }
+
+                }
+                else{
+                    if(reset){
+                        screen.textContent="";
+                        reset=false
+                    }else{
+                    screen.textContent+=value
+                    screen.scrollLeft = screen.scrollWidth;}
+                }
+            })
+        })
+
+
+
+    </script>
+
+</body>
+</html>
